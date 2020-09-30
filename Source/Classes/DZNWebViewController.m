@@ -422,9 +422,14 @@ static char DZNWebViewControllerKVOContext = 0;
     }
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:error.localizedDescription delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-    [alert show];
+
+    UIAlertController *alertController =  [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil) message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction: [UIAlertAction
+                                 actionWithTitle:NSLocalizedString(@"OK", nil)
+                                 style:UIAlertActionStyleCancel
+                                 handler:^(UIAlertAction * action) {}]];
+
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (BOOL)showNavigationPromptTitle
